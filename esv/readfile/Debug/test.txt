@@ -1,0 +1,11 @@
+string.no.header ="Oppdatering"
+string.no.text ="Oppdater programvaren"
+string.no.button_cancel =                                            "Avbryt"
+string.en.header = "Updating"
+string.en.text = "Update your software45"
+string.en.button_ok = "Ok"
+string.en.button_cancel = "Cancel"
+config.loglevel = 1
+config.update.interval = 32
+config.update.server1 = "http://www.aspenberg.info"
+config.update.timeout = 20
