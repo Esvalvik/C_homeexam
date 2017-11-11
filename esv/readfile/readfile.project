@@ -93,6 +93,8 @@
     </Configuration>
   </Settings>
   <VirtualDirectory Name="src">
-    <File Name="main.c"/>
+    <File Name="test.c"/>
+    <File Name="node.c"/>
+    <File Name="node.h"/>
   </VirtualDirectory>
 </CodeLite_Project>
