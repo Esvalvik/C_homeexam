@@ -11,6 +11,55 @@ void init()
 	root = CreateNode("root", NULL, NULL);
 }
 
+typedef void (FNPRINT) (char* name, char* strValue, ULONG ulVal);
+
+void Enumerate(char* path)
+{
+	printf("Enumerating %s\n", path);
+	char* pPath = strdup(path);
+	int count = 0;
+	int len = strlen(pPath);
+	if(pPath[len - 1] == '*')
+	{
+		pPath[len-2] = 0;
+	}
+	NODE* node = findNodeByKey(pPath);
+	FNPRINT *fnsPrint = &printNode;
+	if(node != NULL)
+	{
+		for(int i = 0; i < MAX_NODES; i++)
+		{
+			if(node->pnNodes[i] != NULL)
+			{
+				if(GetTypeByNode(node->pnNodes[i]) == INT)
+				{
+					fnsPrint(node->pnNodes[i]->psName, NULL, node->pnNodes[i]->ulVal);
+				}
+				else if(GetTypeByNode(node->pnNodes[i]) == STRING)
+				{
+					fnsPrint(node->pnNodes[i]->psName, node->pnNodes[i]->pStrVal, NULL);
+				}
+				count++;
+			}
+		}
+	}
+}
+
+typedef void (FNPRINT) (char* name, char* strValue, ULONG ulVal);
+
+void printNode(char* name, char* strValue, ULONG ulVal)
+{
+	if(strValue == NULL)
+	{
+		printf("Name: %s, Value: %lu\n", name, ulVal);
+	}
+	else
+	{
+		printf("Name: %s, Value: %s\n", name, strValue);
+	}
+	
+}
+
 char* GetText(char* name, char* lang)
 {
 	char* str = "strings.";
@@ -40,7 +89,7 @@ char* GetText(char* name, char* lang)
 		node = findNodeByKey(pPath);
 		if(node != NULL)
 		{
-			printf("%s text: %s", pPath, node->pStrVal);
+			printf("%s text: %s\n", pPath, node->pStrVal);
 		}
 	}
 	else if(strcmp(lang, "en") == 0)
@@ -154,7 +203,7 @@ int GetType(char* pPath)
 }
 
 //For å kunne finne typen ved å senne inn noden som parameter
-GetTypeByNode(NODE* node)
+int GetTypeByNode(NODE* node)
 {
 	if(node != NULL)
 	{

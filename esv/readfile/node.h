@@ -31,5 +31,6 @@ int checkType(char* value);
 static NODE* CreateNode(const char* pName, ULONG uLong, const char* pStrVal);
 void TestGetType(char* path);
 void removeSpaces(char* string);
+void printNode(char* name, char* strValue, ULONG ulVal);
 
 #endif
